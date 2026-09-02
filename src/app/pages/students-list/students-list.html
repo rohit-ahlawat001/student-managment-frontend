@@ -1,0 +1,46 @@
+<!-- src/app/students-list.html -->
+<h2>Student Directory</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Course</th>
+      <th>Semester</th>
+      <th>Fee Paid</th>
+      <th>Paid Date</th>
+      <th>Pending Fee</th>
+      <th>Next Fee Date</th>
+      <th>Fully Paid?</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (student of students; track student.id) {
+      <tr>
+        <td>
+          <span class="clickable-id" (click)="detialsRedirecction(student.id)">
+            {{ student.id }}
+          </span>
+        </td>
+        <td><strong>{{ student.name }}</strong></td>
+        <td>{{ student.course }}</td>
+        <td>{{ student.semester }}</td>
+        <td>{{ student.fee_paid_amount | currency:'INR' }}</td>
+        <td>{{ student.fee_paid_date | date:'short' }}</td>
+        <td>{{ student.pending_fee_amount | currency:'INR' }}</td>
+        <td>{{ student.next_fee_date ? (student.next_fee_date | date:'mediumDate') : 'N/A' }}</td>
+        <td>
+          <span [class.paid]="student.is_fee_fully_paid" [class.pending]="!student.is_fee_fully_paid">
+            {{ student.is_fee_fully_paid ? 'Yes' : 'No' }}
+          </span>
+        </td>
+      </tr> 
+    } @empty {
+      <tr>
+        <!-- Updated colspan to 9 to match the new total number of columns -->
+        <td colspan="9" class="empty-state">Loading students...</td>
+      </tr>
+    }
+  </tbody>
+</table>

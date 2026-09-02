@@ -1,0 +1,40 @@
+<!-- src/app/pages/students-list/students-detials/students-detials.html -->
+<h2>Student Details</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Course</th>
+      <th>Semester</th>
+      <th>Fee Paid</th>
+      <th>Paid Date</th>
+      <th>Pending Fee</th>
+      <th>Next Fee Date</th>
+      <th>Fully Paid?</th>
+    </tr>
+  </thead>
+  <tbody>
+    @if (studentsDetails){
+      <tr>
+        <td><strong>{{ studentsDetails.name }}</strong></td>
+        <td>{{ studentsDetails.course }}</td>
+        <td>{{ studentsDetails.semester }}</td> 
+        <td>{{ studentsDetails.fee_paid_amount | currency:'INR' }}</td>
+        <td>{{ studentsDetails.fee_paid_date | date:'short' }}</td>
+        <td>{{ studentsDetails.pending_fee_amount | currency:'INR' }}</td>
+        <td>{{ studentsDetails.next_fee_date ? (studentsDetails.next_fee_date | date:'mediumDate') : 'N/A' }}</td>
+        <td> 
+          <span [class.paid]="studentsDetails.is_fee_fully_paid" [class.pending]="!studentsDetails.is_fee_fully_paid">
+            {{ studentsDetails.is_fee_fully_paid ? 'Yes' : 'No' }}
+          </span>
+        </td>
+      </tr> 
+    } @else {
+      <tr>
+        <!-- Updated colspan to 8 to match the new total number of columns -->
+        <td colspan="8">Loading student details...</td>
+      </tr>
+    }
+  </tbody>
+</table>
