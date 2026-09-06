@@ -1,58 +1,153 @@
-/* src/app/pages/students-list/students-detials/students-detials.scss */
+
+.details-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 h2 {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #2c3e50;
+  color: #333;
   margin-bottom: 20px;
 }
 
-table {
-  width: 100%;
-  max-width: 600px;
-  border-collapse: collapse;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-  border-radius: 8px;
-  overflow: hidden; /* Ensures the rounded corners wrap the header */
+.student-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eaeaea;
+  overflow: hidden;
+}
 
-  thead {
-    background-color: #3498db;
-    color: #ffffff;
-    width: 100%;
+.card-header {
+  background-color: #f8f9fa;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eaeaea;
+}
 
-    th {
-      padding: 15px;
-      text-align: left;
-      font-weight: 600;
-      text-transform: uppercase;
-      font-size: 0.9rem;
-      letter-spacing: 0.5px;
-    }
-  }
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
 
-  tbody {
-    tr {
-      border-bottom: 1px solid #ecf0f1;
-      transition: background-color 0.2s ease;
+.avatar {
+  width: 45px;
+  height: 45px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
 
-      &:hover {
-        background-color: #f8f9fa;
-      }
+.card-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.4rem;
+}
 
-      &:last-child {
-        border-bottom: none;
-      }
-    }
+/* Badges */
+.badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
 
-    td {
-      padding: 15px;
-      color: #34495e;
-      font-size: 0.95rem;
+.badge-paid {
+  background-color: #d4edda;
+  color: #155724;
+}
 
-      strong {
-        color: #2c3e50;
-      }
-    }
-  }
+.badge-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+/* Card Body & Grid */
+.card-body {
+  padding: 24px;
+}
+
+.info-group h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #6c757d;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.value {
+  font-size: 1.05rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background-color: #eaeaea;
+  margin: 25px 0;
+}
+
+/* Highlights */
+.highlight-green {
+  color: #28a745;
+}
+
+.highlight-red {
+  color: #dc3545;
+}
+
+/* Loading State */
+.loading-card {
+  background: #fdfdfd;
+  border: 1px dashed #ccc;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

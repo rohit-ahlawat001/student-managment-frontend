@@ -1,40 +1,75 @@
-<!-- src/app/pages/students-list/students-detials/students-detials.html -->
-<h2>Student Details</h2>
+<div class="details-wrapper">
+  <h2>Student Details</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Course</th>
-      <th>Semester</th>
-      <th>Fee Paid</th>
-      <th>Paid Date</th>
-      <th>Pending Fee</th>
-      <th>Next Fee Date</th>
-      <th>Fully Paid?</th>
-    </tr>
-  </thead>
-  <tbody>
-    @if (studentsDetails){
-      <tr>
-        <td><strong>{{ studentsDetails.name }}</strong></td>
-        <td>{{ studentsDetails.course }}</td>
-        <td>{{ studentsDetails.semester }}</td> 
-        <td>{{ studentsDetails.fee_paid_amount | currency:'INR' }}</td>
-        <td>{{ studentsDetails.fee_paid_date | date:'short' }}</td>
-        <td>{{ studentsDetails.pending_fee_amount | currency:'INR' }}</td>
-        <td>{{ studentsDetails.next_fee_date ? (studentsDetails.next_fee_date | date:'mediumDate') : 'N/A' }}</td>
-        <td> 
-          <span [class.paid]="studentsDetails.is_fee_fully_paid" [class.pending]="!studentsDetails.is_fee_fully_paid">
-            {{ studentsDetails.is_fee_fully_paid ? 'Yes' : 'No' }}
-          </span>
-        </td>
-      </tr> 
-    } @else {
-      <tr>
-        <!-- Updated colspan to 8 to match the new total number of columns -->
-        <td colspan="8">Loading student details...</td>
-      </tr>
-    }
-  </tbody>
-</table>
+  @if (studentsDetails) {
+  <div class="student-card">
+
+    <!-- Card Header -->
+    <div class="card-header">
+      <div class="profile-info">
+        <div class="avatar">{{ studentsDetails.name.charAt(0) }}</div>
+        <h3>{{ studentsDetails.name }}</h3>
+      </div>
+      <span class="badge" [class.badge-paid]="studentsDetails.is_fee_fully_paid"
+        [class.badge-pending]="!studentsDetails.is_fee_fully_paid">
+        {{ studentsDetails.is_fee_fully_paid ? 'Fully Paid' : 'Payment Pending' }}
+      </span>
+    </div>
+
+    <!-- Card Body -->
+    <div class="card-body">
+
+      <!-- Academic Section -->
+      <div class="info-group">
+        <h4>Academic Information</h4>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Course</span>
+            <span class="value">{{ studentsDetails.course }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Semester</span>
+            <span class="value">Semester {{ studentsDetails.semester }}</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Fee Section -->
+      <div class="info-group">
+        <h4>Fee Details</h4>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Fee Paid</span>
+            <span class="value highlight-green">{{ studentsDetails.fee_paid_amount | currency:'INR' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Paid Date</span>
+            <span class="value">{{ studentsDetails.fee_paid_date | date:'mediumDate' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Pending Fee</span>
+            <span class="value" [class.highlight-red]="studentsDetails.pending_fee_amount > 0">
+              {{ studentsDetails.pending_fee_amount | currency:'INR' }}
+            </span>
+          </div>
+          <div class="info-item">
+            <span class="label">Next Due Date</span>
+            <span class="value">
+              {{ studentsDetails.next_fee_date ? (studentsDetails.next_fee_date | date:'mediumDate') : 'N/A' }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  } @else {
+  <!-- Loading State -->
+  <div class="loading-card">
+    <div class="spinner"></div>
+    <p>Loading student details</p>
+  </div>
+  }
+</div>
