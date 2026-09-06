@@ -23,10 +23,6 @@ export class StudentsList implements OnInit {
     private activateRoute: ActivatedRoute,
   ) {}
 
-
-  // 2. Create an array to store the incoming data
-
-
   ngOnInit() {
     this.getContactInfo();
   }
@@ -40,7 +36,6 @@ export class StudentsList implements OnInit {
         console.log(this.students, 'this.students');
         this.cdr.detectChanges();
         
-        // 2. Use .set() to update the signal and trigger the UI
       },
       error: (error) => {
         console.error("There was an error!", error);
