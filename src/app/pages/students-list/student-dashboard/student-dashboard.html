@@ -1,0 +1,129 @@
+<div class="dashboard-wrapper">
+
+    <!-- Header Section -->
+    <header class="dashboard-header">
+        <div>
+            <h2>Student Analytics Dashboard backed is pending</h2>
+            <p class="subtitle">Overview of enrollment, fees, and pending balances</p>
+        </div>
+        <button class="refresh-btn" (click)="fetchDashboardData()">↻ Refresh</button>
+    </header>
+
+    <!-- Error Message -->
+    @if (errorMessage) {
+    <div class="alert alert-error">
+        {{ errorMessage }}
+    </div>
+    }
+
+    <!-- Loading Spinner -->
+    @if (isLoading) {
+    <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading analytics...</p>
+    </div>
+    } @else if (dashboardData) {
+
+    <!-- Top KPI Metrics Cards -->
+    <div class="kpi-grid">
+
+        <div class="kpi-card">
+            <div class="card-icon icon-blue">👥</div>
+            <div class="card-info">
+                <span class="kpi-title">Total Students</span>
+                <h3 class="kpi-value">{{ dashboardData.total_students }}</h3>
+            </div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="card-icon icon-green">💰</div>
+            <div class="card-info">
+                <span class="kpi-title">Total Fee Collected</span>
+                <h3 class="kpi-value highlight-green">
+                    {{ dashboardData.total_fee_collected | currency:'INR':'symbol':'1.0-0' }}
+                </h3>
+            </div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="card-icon icon-red">⚠️</div>
+            <div class="card-info">
+                <span class="kpi-title">Total Pending Fee</span>
+                <h3 class="kpi-value highlight-red">
+                    {{ dashboardData.total_pending_fee | currency:'INR':'symbol':'1.0-0' }}
+                </h3>
+            </div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="card-icon icon-purple">✅</div>
+            <div class="card-info">
+                <span class="kpi-title">Payment Status</span>
+                <h3 class="kpi-value small-text">
+                    <span>{{ dashboardData.fully_paid_students }} Paid</span> /
+                    <span class="pending-text">{{ dashboardData.pending_paid_students }} Due</span>
+                </h3>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Main Grid Content -->
+    <div class="dashboard-grid">
+
+        <!-- Course Distribution Card -->
+        <div class="grid-card">
+            <div class="card-header">
+                <h4>Course Breakdown</h4>
+            </div>
+            <div class="course-list">
+                @for (item of courseList; track item.name) {
+                <div class="course-item">
+                    <span class="course-name">{{ item.name }}</span>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" [style.width.%]="(item.count / dashboardData.total_students) * 100">
+                        </div>
+                    </div>
+                    <span class="course-count">{{ item.count }} Students</span>
+                </div>
+                }
+            </div>
+        </div>
+
+        <!-- Pending Payments Alert List -->
+        <div class="grid-card">
+            <div class="card-header">
+                <h4>Immediate Fee Due Alerts</h4>
+            </div>
+
+            <div class="table-responsive">
+                <table class="alert-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Course</th>
+                            <th>Pending Fee</th>
+                            <th>Due Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (student of dashboardData.recent_pending_payments; track student.id) {
+                        <tr>
+                            <td><strong>{{ student.name }}</strong></td>
+                            <td>{{ student.course }} (Sem {{ student.semester }})</td>
+                            <td class="highlight-red">{{ student.pending_fee_amount | currency:'INR' }}</td>
+                            <td>{{ student.next_fee_date ? (student.next_fee_date | date:'mediumDate') : 'N/A' }}</td>
+                        </tr>
+                        } @empty {
+                        <tr>
+                            <td colspan="4" class="empty">No pending payments found!</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    }
+</div>

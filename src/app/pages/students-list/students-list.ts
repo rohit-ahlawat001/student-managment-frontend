@@ -46,7 +46,7 @@ export class StudentsList implements OnInit {
     });
   }
   detialsRedirecction(id: any){
-   this.router.navigate(['/student-detials'], { queryParams: { id: id }});
+   this.router.navigate(['/student-details'], { queryParams: { id: id }});
   }
 
   deleteStudent(id: number) {
