@@ -78,3 +78,142 @@ table {
     background-color: #3498db;
   }
 }
+
+//  Delete student modal styles
+
+/* Table Action Button Styles */
+.action-cell {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.delete-btn {
+  color: #e63946;
+}
+
+.delete-btn:hover {
+  background-color: #ffe5e5;
+  color: #d62828;
+}
+
+/* Success Banner */
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #155724;
+}
+
+/* Modal Overlay & Card */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background: #ffffff;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+.modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: #333;
+}
+
+.modal-body {
+  padding: 20px;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.modal-footer {
+  padding: 12px 20px;
+  background: #f9f9f9;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid #eee;
+}
+
+/* Modal Action Buttons */
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  font-size: 0.9rem;
+}
+
+.btn-cancel {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.btn-cancel:hover {
+  background: #d5d5d5;
+}
+
+.btn-confirm-delete {
+  background: #e63946;
+  color: #ffffff;
+}
+
+.btn-confirm-delete:hover {
+  background: #d62828;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

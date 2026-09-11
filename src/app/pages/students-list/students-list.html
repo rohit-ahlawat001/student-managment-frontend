@@ -1,22 +1,31 @@
-<!-- src/app/students-list.html -->
-<h2>Student Directory</h2>
+<div class="table-container">
+  <h2>Student Directory</h2>
 
-<table>
-  <thead>
-    <tr> 
-      <th>ID</th>
-      <th>Name</th>
-      <th>Course</th>
-      <th>Semester</th>
-      <th>Fee Paid</th>
-      <th>Paid Date</th>
-      <th>Pending Fee</th>
-      <th>Next Fee Date</th>
-      <th>Fully Paid?</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (student of students; track student.id) {
+  <!-- Success Notification Banner -->
+  @if (successMessage) {
+  <div class="alert alert-success">
+    <span>{{ successMessage }}</span>
+    <button class="close-btn" (click)="successMessage = ''">&times;</button>
+  </div>
+  }
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Course</th>
+        <th>Semester</th>
+        <th>Fee Paid</th>
+        <th>Paid Date</th>
+        <th>Pending Fee</th>
+        <th>Next Fee Date</th>
+        <th>Fully Paid?</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (student of students; track student.id) {
       <tr>
         <td>
           <span class="clickable-id" (click)="detialsRedirecction(student.id)">
@@ -35,12 +44,42 @@
             {{ student.is_fee_fully_paid ? 'Yes' : 'No' }}
           </span>
         </td>
-      </tr> 
-    } @empty {
-      <tr>
-        <!-- Updated colspan to 9 to match the new total number of columns -->
-        <td colspan="9" class="empty-state">Loading students...</td>
+        <td class="action-cell">
+          <button class="icon-btn delete-btn" (click)="openDeleteModal(student)" title="Delete Student">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              <line x1="10" y1="11" x2="10" y2="17"></line>
+              <line x1="14" y1="11" x2="14" y2="17"></line>
+            </svg>
+          </button>
+        </td>
       </tr>
-    }
-  </tbody>
-</table>
+      } @empty {
+      <tr>
+        <!-- Updated colspan to 10 to include the Actions column -->
+        <td colspan="10" class="empty-state">Loading students...</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<!-- Confirmation Modal -->
+@if (showDeleteModal) {
+<div class="modal-backdrop" (click)="closeDeleteModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Confirm Deletion</h3>
+    </div>
+    <div class="modal-body">
+      <p>Are you sure you want to delete <strong>{{ selectedStudentName }}</strong>?</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-cancel" (click)="closeDeleteModal()">Cancel</button>
+      <button class="btn btn-confirm-delete" (click)="confirmDelete()">Yes, Delete</button>
+    </div>
+  </div>
+</div>
+}
