@@ -6,16 +6,22 @@
 
     <ul class="nav-links">
         <li>
-            <a routerLink="/dashboard" routerLinkActive="active">
+            <p (click)="navigateToDashboard()">
                 <span class="icon">📊</span>
                 <span class="label">Dashboard</span>
-            </a>
+            </p>
         </li>
         <li>
-            <a routerLink="/students" routerLinkActive="active">
+            <p (click)="cehcingFin()">
                 <span class="icon">👥</span>
                 <span class="label">Student List</span>
-            </a>
+            </p>
+        </li>
+        <li>
+            <p (click)="addStudent()">
+                <span class="icon">➕</span>
+                <span class="label">Add Student</span>
+            </p>
         </li>
     </ul>
 </nav>

@@ -42,7 +42,7 @@ $active-bg: #2563eb;
     flex-direction: column;
     gap: 6px;
 
-    a {
+    p {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -57,6 +57,7 @@ $active-bg: #2563eb;
       &:hover {
         background-color: lighten($bg-dark, 6%);
         color: #fff;
+        cursor: pointer;
       }
 
       &.active {
