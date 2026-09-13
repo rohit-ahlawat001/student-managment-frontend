@@ -6,7 +6,7 @@ import { AddStudentFee } from './pages/add-student-fee/add-student-fee';
 
 export const routes: Routes = [
     {
-        path: 'dashboard',
+        path: '',
         component: StudentDashboardComponent,
         pathMatch: 'full'
     },

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 // Structure matching backend dashboard_data payload
 export interface DashboardData {
@@ -30,8 +31,11 @@ export class StudentDashboardComponent implements OnInit {
   dashboardData: DashboardData | null = null;
   isLoading: boolean = true;
   errorMessage: string = '';
+  // router: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fetchDashboardData();
@@ -43,6 +47,7 @@ export class StudentDashboardComponent implements OnInit {
 
     this.http.get<DashboardData>(url).subscribe({
       next: (data) => {
+        // debugger;
         this.dashboardData = data;
         this.isLoading = false;
       },
@@ -61,5 +66,9 @@ export class StudentDashboardComponent implements OnInit {
       name: course,
       count: this.dashboardData!.course_breakdown[course]
     }));
+  }
+    cehcingFin(){
+    console.log("checkingFin");
+    this.router.navigate(['/student-list']);
   }
 }
