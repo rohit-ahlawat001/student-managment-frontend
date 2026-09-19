@@ -83,8 +83,10 @@ table {
 
 /* Table Action Button Styles */
 .action-cell {
-  text-align: center;
-  white-space: nowrap;
+    display: flex;
+    align-items: center;
+    // gap: 8px;
+    justify-content: center;
 }
 
 .icon-btn {
@@ -216,4 +218,18 @@ table {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.edit-btn{
+  background-color: transparent !important;
+  border: none !important;
+  color: #3498db;
+ svg{
+   width: 1rem;
+ }
+}
+.main-heading{
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  font-weight: 600;
 }

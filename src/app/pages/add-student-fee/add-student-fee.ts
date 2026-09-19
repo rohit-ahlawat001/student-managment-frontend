@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { log } from 'console';
 
 @Component({
   selector: 'app-add-student-fee',
@@ -71,11 +72,11 @@ export class AddStudentFee {
       next: (response) => {
         this.isSubmitting = false;
         this.successMessage = response?.message || 'Student fee record created successfully!';
-        
+        console.log(response, "astudent data created")
         // Redirect to student list after 2 seconds
         setTimeout(() => {
-          this.router.navigate(['/students']);
-        }, 1500);
+          this.router.navigate(['/student-list']);
+        }, 1000);
       },
       error: (error) => {
         console.error('Error adding student:', error);
