@@ -53,6 +53,12 @@ $border-color: #e9ecef;
   margin-bottom: 24px;
 }
 
+.hover-card{
+  &:hover{
+    opacity: 0.7;
+    cursor: pointer;
+  }
+}
 .kpi-card {
   background: #ffffff;
   border-radius: 8px;
