@@ -71,7 +71,7 @@ export class AddStudentFee {
 
     this.http.post<any>(url, payload).subscribe({
       next: (response) => {
-        debugger
+       
         this.isSubmitting = false;
         this.successMessage = response?.message || 'Student fee record created successfully!';
         console.log(response, "astudent data created")
@@ -80,7 +80,7 @@ export class AddStudentFee {
         setTimeout(() => {
           this.showSuccessModal = false;
           this.router.navigate(['/student-list']);
-        }, 5000);
+        }, 3000);
       },
       error: (error) => {
         console.error('Error adding student:', error);
