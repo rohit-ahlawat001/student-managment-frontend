@@ -65,7 +65,7 @@ export class AddStudentFee {
       is_fee_fully_paid: Number(formValue.pending_fee_amount) === 0
     };
 
-    const url = 'http://127.0.0.1:8000/students_add'; // Your FastAPI POST endpoint
+    const url = 'http://127.0.0.1:8000/create_student'; // Your FastAPI POST endpoint
 
     this.http.post<any>(url, payload).subscribe({
       next: (response) => {
