@@ -150,9 +150,11 @@
     </div>
 
     <!-- Student Created successfuly modal -->
-    <div class="student-created-wrapper card-form">
-        <h3>Student Created Successfully</h3>
-        <div>
+    {{showSuccessModal}}
+    <div class="student-created-wrapper card-form" *ngIf="showSuccessModal">
+        <div class="success-inner">
+
+            <h3>Student Created Successfully</h3>
             <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle class="success-circle" cx="12" cy="12" r="10" pathLength="1" transform="rotate(-90 12 12)">

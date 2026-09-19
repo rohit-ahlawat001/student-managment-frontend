@@ -19,6 +19,7 @@ export class AddStudentFee {
   errorMessage: string = '';
 
   courses: string[] = ['MCA', 'BCA', 'BTech', 'BBA', 'MBA'];
+  showSuccessModal: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -70,13 +71,16 @@ export class AddStudentFee {
 
     this.http.post<any>(url, payload).subscribe({
       next: (response) => {
+        debugger
         this.isSubmitting = false;
         this.successMessage = response?.message || 'Student fee record created successfully!';
         console.log(response, "astudent data created")
         // Redirect to student list after 2 seconds
+        this.showSuccessModal = true;
         setTimeout(() => {
+          this.showSuccessModal = false;
           this.router.navigate(['/student-list']);
-        }, 1000);
+        }, 5000);
       },
       error: (error) => {
         console.error('Error adding student:', error);
@@ -87,6 +91,6 @@ export class AddStudentFee {
   }
 
   onCancel(): void {
-    this.router.navigate(['/students']);
+    this.router.navigate(['/students-list']);
   }
 }
