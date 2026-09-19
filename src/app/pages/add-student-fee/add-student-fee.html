@@ -1,148 +1,164 @@
-<div class="form-wrapper">
+<div class="student-fee-wrapper">
+    <div class="form-wrapper">
 
-    <header class="page-header">
-        <div>
-            <h2>Add Student Fee Record</h2>
-            <p class="subtitle">Enter student details and initial payment information</p>
+        <header class="page-header">
+            <div>
+                <h2>Add Student Fee Record</h2>
+                <p class="subtitle">Enter student details and initial payment information</p>
+            </div>
+            <button class="btn btn-secondary" (click)="onCancel()">Back to List</button>
+        </header>
+
+        <!-- Alerts -->
+        @if (successMessage) {
+        <div class="alert alert-success">
+            ✅ {{ successMessage }}
         </div>
-        <button class="btn btn-secondary" (click)="onCancel()">Back to List</button>
-    </header>
+        }
 
-    <!-- Alerts -->
-    @if (successMessage) {
-    <div class="alert alert-success">
-        ✅ {{ successMessage }}
-    </div>
-    }
+        @if (errorMessage) {
+        <div class="alert alert-error">
+            ⚠️ {{ errorMessage }}
+        </div>
+        }
 
-    @if (errorMessage) {
-    <div class="alert alert-error">
-        ⚠️ {{ errorMessage }}
-    </div>
-    }
+        <!-- Main Card Form -->
+        <div class="card-form">
+            <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
 
-    <!-- Main Card Form -->
-    <div class="card-form">
-        <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+                <!-- Section: Personal & Academic -->
+                <div class="form-section">
+                    <h3>Academic Info</h3>
 
-            <!-- Section: Personal & Academic -->
-            <div class="form-section">
-                <h3>Academic Info</h3>
+                    <div class="form-grid">
 
-                <div class="form-grid">
-
-                    <!-- Name Field -->
-                    <div class="form-group full-width">
-                        <label for="name">Student Name <span class="required">*</span></label>
-                        <input id="name" type="text" formControlName="name" placeholder="e.g. Rahul Sharma"
-                            [class.invalid]="studentForm.get('name')?.invalid && studentForm.get('name')?.touched" />
-                        @if (studentForm.get('name')?.invalid && studentForm.get('name')?.touched) {
-                        <span class="error-msg">Please enter a valid student name (at least 3 characters)</span>
-                        }
-                    </div>
-
-                    <!-- Course Field -->
-                    <div class="form-group">
-                        <label for="course">Course <span class="required">*</span></label>
-                        <select id="course" formControlName="course"
-                            [class.invalid]="studentForm.get('course')?.invalid && studentForm.get('course')?.touched">
-                            <option value="" disabled selected>Select Course</option>
-                            @for (c of courses; track c) {
-                            <option [value]="c">{{ c }}</option>
+                        <!-- Name Field -->
+                        <div class="form-group full-width">
+                            <label for="name">Student Name <span class="required">*</span></label>
+                            <input id="name" type="text" formControlName="name" placeholder="e.g. Rahul Sharma"
+                                [class.invalid]="studentForm.get('name')?.invalid && studentForm.get('name')?.touched" />
+                            @if (studentForm.get('name')?.invalid && studentForm.get('name')?.touched) {
+                            <span class="error-msg">Please enter a valid student name (at least 3 characters)</span>
                             }
-                        </select>
-                        @if (studentForm.get('course')?.invalid && studentForm.get('course')?.touched) {
-                        <span class="error-msg">Please select a course</span>
-                        }
-                    </div>
+                        </div>
 
-                    <!-- Semester Field -->
-                    <div class="form-group">
-                        <label for="semester">Semester <span class="required">*</span></label>
-                        <input id="semester" type="number" formControlName="semester" placeholder="1 to 8"
-                            [class.invalid]="studentForm.get('semester')?.invalid && studentForm.get('semester')?.touched" />
-                        @if (studentForm.get('semester')?.invalid && studentForm.get('semester')?.touched) {
-                        <span class="error-msg">Semester must be between 1 and 8</span>
-                        }
-                    </div>
-
-                </div>
-            </div>
-
-            <hr class="divider">
-
-            <!-- Section: Fee Payment Details -->
-            <div class="form-section">
-                <h3>Fee & Payment Breakdown</h3>
-
-                <div class="form-grid">
-
-                    <!-- Fee Paid Amount -->
-                    <div class="form-group">
-                        <label for="fee_paid_amount">Amount Paid (₹) <span class="required">*</span></label>
-                        <input id="fee_paid_amount" type="number" formControlName="fee_paid_amount" placeholder="0"
-                            [class.invalid]="studentForm.get('fee_paid_amount')?.invalid && studentForm.get('fee_paid_amount')?.touched" />
-                        @if (studentForm.get('fee_paid_amount')?.invalid && studentForm.get('fee_paid_amount')?.touched)
-                        {
-                        <span class="error-msg">Amount paid is required</span>
-                        }
-                    </div>
-
-                    <!-- Paid Date -->
-                    <div class="form-group">
-                        <label for="fee_paid_date">Payment Date <span class="required">*</span></label>
-                        <input id="fee_paid_date" type="date" formControlName="fee_paid_date"
-                            [class.invalid]="studentForm.get('fee_paid_date')?.invalid && studentForm.get('fee_paid_date')?.touched" />
-                        @if (studentForm.get('fee_paid_date')?.invalid && studentForm.get('fee_paid_date')?.touched) {
-                        <span class="error-msg">Payment date is required</span>
-                        }
-                    </div>
-
-                    <!-- Pending Fee Amount -->
-                    <div class="form-group">
-                        <label for="pending_fee_amount">Pending Fee (₹) <span class="required">*</span></label>
-                        <input id="pending_fee_amount" type="number" formControlName="pending_fee_amount"
-                            placeholder="0"
-                            [class.invalid]="studentForm.get('pending_fee_amount')?.invalid && studentForm.get('pending_fee_amount')?.touched" />
-                        @if (studentForm.get('pending_fee_amount')?.invalid &&
-                        studentForm.get('pending_fee_amount')?.touched) {
-                        <span class="error-msg">Pending fee amount is required</span>
-                        }
-                    </div>
-
-                    <!-- Next Fee Due Date -->
-                    <div class="form-group">
-                        <label for="next_fee_date">
-                            Next Due Date
-                            @if (studentForm.get('pending_fee_amount')?.value > 0) {
-                            <span class="required">*</span>
+                        <!-- Course Field -->
+                        <div class="form-group">
+                            <label for="course">Course <span class="required">*</span></label>
+                            <select id="course" formControlName="course"
+                                [class.invalid]="studentForm.get('course')?.invalid && studentForm.get('course')?.touched">
+                                <option value="" disabled selected>Select Course</option>
+                                @for (c of courses; track c) {
+                                <option [value]="c">{{ c }}</option>
+                                }
+                            </select>
+                            @if (studentForm.get('course')?.invalid && studentForm.get('course')?.touched) {
+                            <span class="error-msg">Please select a course</span>
                             }
-                        </label>
-                        <input id="next_fee_date" type="date" formControlName="next_fee_date"
-                            [disabled]="studentForm.get('pending_fee_amount')?.value === 0"
-                            [class.invalid]="studentForm.get('next_fee_date')?.invalid && studentForm.get('next_fee_date')?.touched" />
-                        @if (studentForm.get('next_fee_date')?.invalid && studentForm.get('next_fee_date')?.touched) {
-                        <span class="error-msg">Due date is required for pending fees</span>
-                        }
+                        </div>
+
+                        <!-- Semester Field -->
+                        <div class="form-group">
+                            <label for="semester">Semester <span class="required">*</span></label>
+                            <input id="semester" type="number" formControlName="semester" placeholder="1 to 8"
+                                [class.invalid]="studentForm.get('semester')?.invalid && studentForm.get('semester')?.touched" />
+                            @if (studentForm.get('semester')?.invalid && studentForm.get('semester')?.touched) {
+                            <span class="error-msg">Semester must be between 1 and 8</span>
+                            }
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
 
-            <!-- Actions Footer -->
-            <div class="form-actions">
-                <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
-                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
-                    @if (isSubmitting) {
-                    <span class="spinner-sm"></span> Saving...
-                    } @else {
-                    Save Student Fee
-                    }
-                </button>
-            </div>
+                <hr class="divider">
 
-        </form>
+                <!-- Section: Fee Payment Details -->
+                <div class="form-section">
+                    <h3>Fee & Payment Breakdown</h3>
+
+                    <div class="form-grid">
+
+                        <!-- Fee Paid Amount -->
+                        <div class="form-group">
+                            <label for="fee_paid_amount">Amount Paid (₹) <span class="required">*</span></label>
+                            <input id="fee_paid_amount" type="number" formControlName="fee_paid_amount" placeholder="0"
+                                [class.invalid]="studentForm.get('fee_paid_amount')?.invalid && studentForm.get('fee_paid_amount')?.touched" />
+                            @if (studentForm.get('fee_paid_amount')?.invalid &&
+                            studentForm.get('fee_paid_amount')?.touched)
+                            {
+                            <span class="error-msg">Amount paid is required</span>
+                            }
+                        </div>
+
+                        <!-- Paid Date -->
+                        <div class="form-group">
+                            <label for="fee_paid_date">Payment Date <span class="required">*</span></label>
+                            <input id="fee_paid_date" type="date" formControlName="fee_paid_date"
+                                [class.invalid]="studentForm.get('fee_paid_date')?.invalid && studentForm.get('fee_paid_date')?.touched" />
+                            @if (studentForm.get('fee_paid_date')?.invalid && studentForm.get('fee_paid_date')?.touched)
+                            {
+                            <span class="error-msg">Payment date is required</span>
+                            }
+                        </div>
+
+                        <!-- Pending Fee Amount -->
+                        <div class="form-group">
+                            <label for="pending_fee_amount">Pending Fee (₹) <span class="required">*</span></label>
+                            <input id="pending_fee_amount" type="number" formControlName="pending_fee_amount"
+                                placeholder="0"
+                                [class.invalid]="studentForm.get('pending_fee_amount')?.invalid && studentForm.get('pending_fee_amount')?.touched" />
+                            @if (studentForm.get('pending_fee_amount')?.invalid &&
+                            studentForm.get('pending_fee_amount')?.touched) {
+                            <span class="error-msg">Pending fee amount is required</span>
+                            }
+                        </div>
+
+                        <!-- Next Fee Due Date -->
+                        <div class="form-group">
+                            <label for="next_fee_date">
+                                Next Due Date
+                                @if (studentForm.get('pending_fee_amount')?.value > 0) {
+                                <span class="required">*</span>
+                                }
+                            </label>
+                            <input id="next_fee_date" type="date" formControlName="next_fee_date"
+                                [disabled]="studentForm.get('pending_fee_amount')?.value === 0"
+                                [class.invalid]="studentForm.get('next_fee_date')?.invalid && studentForm.get('next_fee_date')?.touched" />
+                            @if (studentForm.get('next_fee_date')?.invalid && studentForm.get('next_fee_date')?.touched)
+                            {
+                            <span class="error-msg">Due date is required for pending fees</span>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Actions Footer -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+                        @if (isSubmitting) {
+                        <span class="spinner-sm"></span> Saving...
+                        } @else {
+                        Save Student Fee
+                        }
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Student Created successfuly modal -->
+    <div class="student-created-wrapper card-form">
+        <h3>Student Created Successfully</h3>
+        <div>
+            <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle class="success-circle" cx="12" cy="12" r="10" pathLength="1" transform="rotate(-90 12 12)">
+                </circle>
+                <polyline class="success-check" points="7 12.5 10.5 16 17 9" pathLength="1"></polyline>
+            </svg>
+        </div>
     </div>
 </div>
-
-<!-- Student Created successfuly modal -->
