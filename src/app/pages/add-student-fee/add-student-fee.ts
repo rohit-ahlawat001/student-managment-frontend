@@ -71,7 +71,7 @@ export class AddStudentFee {
 
     this.http.post<any>(url, payload).subscribe({
       next: (response) => {
-       
+        debugger
         this.isSubmitting = false;
         this.successMessage = response?.message || 'Student fee record created successfully!';
         console.log(response, "astudent data created")

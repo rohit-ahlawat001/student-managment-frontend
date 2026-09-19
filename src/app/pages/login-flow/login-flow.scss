@@ -1,0 +1,268 @@
+:host {
+  --indigo: #2f2a7a;
+  --indigo-bg: #e3e3fb;
+  --green: #279d5f;
+  --green-dark: #0f5132;
+  --green-bg: #d9eee2;
+  --text: #14161a;
+  --muted: #5b6270;
+  --border: #d5d9e0;
+  --page-bg: #f7f8fa;
+
+  display: block;
+  font-family: 'Nunito Sans', 'Segoe UI', Arial, sans-serif;
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+/* ---------- Left side ---------- */
+.intro {
+  background: var(--page-bg);
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.intro-content {
+  max-width: 520px;
+}
+
+.intro h1 {
+  margin: 0 0 8px;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.subtitle {
+  margin: 0 0 40px;
+  font-size: 20px;
+  color: var(--muted);
+}
+
+.block {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.block h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-indigo {
+  background: var(--indigo-bg);
+  color: var(--indigo);
+}
+
+.icon-green {
+  background: var(--green-bg);
+  color: var(--green-dark);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.chips span {
+  padding: 6px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.chips-indigo span {
+  color: var(--indigo);
+}
+
+.chips-green span {
+  color: var(--green-dark);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 32px 0;
+  color: #9aa1ad;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.secure {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--green-dark);
+  font-weight: 700;
+}
+
+/* ---------- Right side ---------- */
+.auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: #fff;
+}
+
+.auth-box {
+  width: 100%;
+  max-width: 440px;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 6px;
+  background: #eff2f5;
+  border-radius: 10px;
+  margin-bottom: 28px;
+}
+
+.tabs button {
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 18px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.tabs button.active {
+  background: #fff;
+  color: var(--text);
+  font-weight: 800;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.hint {
+  margin: 0 0 20px;
+  font-size: 17px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+input {
+  width: 100%;
+  height: 56px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  background: #fff;
+}
+
+input:focus {
+  outline: 2px solid var(--green);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.password-wrap {
+  position: relative;
+}
+
+.password-wrap input {
+  padding-right: 70px;
+}
+
+.eye {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.error {
+  display: block;
+  margin-top: 6px;
+  color: #c62828;
+  font-size: 13px;
+}
+
+.forgot {
+  display: inline-block;
+  margin-bottom: 32px;
+  color: var(--text);
+  font-size: 15px;
+}
+
+.primary-btn {
+  width: 100%;
+  height: 56px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 10px;
+  background: var(--green);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  background: #1f8a52;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 900px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
+
+  .intro {
+    display: none; /* show only the form on small screens */
+  }
+}

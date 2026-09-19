@@ -1,0 +1,134 @@
+<div class="page">
+    <!-- LEFT: about Campify -->
+    <section class="intro">
+        <div class="intro-content">
+            <h1>Campify Makes Fee Management Simple</h1>
+            <p class="subtitle">One platform. Two ways to use it.</p>
+
+            <div class="block">
+                <div class="icon icon-indigo">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                        <path d="M2 10h20"></path>
+                        <path d="M6 15h4"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h2>Pay fees on time, from anywhere, and keep every receipt.</h2>
+                    <div class="chips chips-indigo">
+                        <span>Pay Fees</span>
+                        <span>Download Receipts</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><span>Or</span></div>
+
+            <div class="block">
+                <div class="icon icon-green">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 3v18h18"></path>
+                        <path d="M7 15l4-4 3 3 5-6"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h2>Collect fees, track payments and send reminders for your institute.</h2>
+                    <div class="chips chips-green">
+                        <span>Track Payments</span>
+                        <span>Send Reminders</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="secure">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="M9 12l2 2 4-4"></path>
+            </svg>
+            <span>Your data is encrypted and securely stored.</span>
+        </div>
+    </section>
+
+    <!-- RIGHT: sign in / sign up -->
+    <section class="auth">
+        <div class="auth-box">
+            <div class="tabs">
+                <button type="button" [class.active]="activeTab === 'signin'" (click)="switchTab('signin')">Sign
+                    In</button>
+                <button type="button" [class.active]="activeTab === 'signup'" (click)="switchTab('signup')">Sign
+                    Up</button>
+            </div>
+
+            <!-- SIGN IN -->
+            <form *ngIf="activeTab === 'signin'" [formGroup]="signInForm" (ngSubmit)="onSignIn()" novalidate>
+                <p class="hint">Enter your email and password to continue</p>
+
+                <div class="field">
+                    <input type="email" formControlName="email" placeholder="Email address" />
+                    <small class="error" *ngIf="hasError(signInForm, 'email')">Enter a valid email address</small>
+                </div>
+
+                <div class="field">
+                    <div class="password-wrap">
+                        <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                            placeholder="Password" />
+                        <button type="button" class="eye" (click)="togglePassword()"
+                            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
+                            {{ showPassword ? 'Hide' : 'Show' }}
+                        </button>
+                    </div>
+                    <small class="error" *ngIf="hasError(signInForm, 'password')">Password is required</small>
+                </div>
+
+                <a href="#" class="forgot">Forgot Password?</a>
+
+                <button type="submit" class="primary-btn">Sign In</button>
+            </form>
+
+            <!-- SIGN UP -->
+            <form *ngIf="activeTab === 'signup'" [formGroup]="signUpForm" (ngSubmit)="onSignUp()" novalidate>
+                <p class="hint">Create your account to get started</p>
+
+                <div class="row">
+                    <div class="field">
+                        <input type="text" formControlName="firstName" placeholder="First name" />
+                        <small class="error" *ngIf="hasError(signUpForm, 'firstName')">First name is required</small>
+                    </div>
+                    <div class="field">
+                        <input type="text" formControlName="lastName" placeholder="Last name" />
+                        <small class="error" *ngIf="hasError(signUpForm, 'lastName')">Last name is required</small>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <input type="email" formControlName="email" placeholder="Email address" />
+                    <small class="error" *ngIf="hasError(signUpForm, 'email')">Enter a valid email address</small>
+                </div>
+
+                <div class="field">
+                    <input type="tel" formControlName="phone" placeholder="Phone number" maxlength="10" />
+                    <small class="error" *ngIf="hasError(signUpForm, 'phone')">Enter a 10-digit phone number</small>
+                </div>
+
+                <div class="field">
+                    <div class="password-wrap">
+                        <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                            placeholder="Password" />
+                        <button type="button" class="eye" (click)="togglePassword()"
+                            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
+                            {{ showPassword ? 'Hide' : 'Show' }}
+                        </button>
+                    </div>
+                    <small class="error" *ngIf="hasError(signUpForm, 'password')">Password must be at least 8
+                        characters</small>
+                </div>
+
+                <button type="submit" class="primary-btn">Sign Up</button>
+            </form>
+        </div>
+    </section>
+</div>
