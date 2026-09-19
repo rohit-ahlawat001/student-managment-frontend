@@ -9,4 +9,7 @@ import { Sidenavbar } from './pages/students-list/sidenavbar/sidenavbar';
 })
 export class App {
   protected readonly title = signal('frontend');
+  userLogin:any;
+ ngOnInit() {
+ }
 }
