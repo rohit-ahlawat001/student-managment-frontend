@@ -25,8 +25,8 @@ export class Sidenavbar {
     this.router.navigate(['/add-student']);
   }
   navigateToDashboard() {
-    debugger;
+    // debugger;
     console.log("navigateToDashboard");
-    this.router.navigate(['/']);
+    this.router.navigate(['/dashboard']);
   }
 }
