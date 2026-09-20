@@ -64,8 +64,18 @@ export class LoginComponent {
       this.signInForm.markAllAsTouched();
       return;
     }
-    // TODO: call the sign in API here
-    console.log('Sign in', this.signInForm.getRawValue());
+    const url = 'http://127.0.0.1:8000/login';
+  this.http.post(url, this.signInForm.getRawValue()).subscribe({
+      next: () => {
+        // this.isLoading = false;
+        this.router.navigate(['/dashboard']);
+        this.successMessage = 'Account created. Please sign in.';
+      },
+      error: (error) => {
+        console.error('Error creating account:', error);
+        this.isLoading = false;
+      },
+    });
   }
  
   onSignUp(): void {
