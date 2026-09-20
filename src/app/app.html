@@ -1,9 +1,15 @@
 <div class="app-wrapper row m-0">
-    <div class="left-sidebar col-2 p-0">
-        <app-sidenavbar></app-sidenavbar>
-    </div>
-    <div class="right-sidebar col-10 p-0">
+    <!-- {{ loginValue | json }} → {{ loginValue == 1 }} -->
+    <ng-container *ngIf="loginValue == 1">
+        <div class="left-sidebar col-2 p-0">
+            <app-sidenavbar></app-sidenavbar>
+        </div>
+        <div class="right-sidebar col-10 p-0">
+            <router-outlet></router-outlet>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="loginValue != 1">
         <router-outlet></router-outlet>
-    </div>
+    </ng-container>
 </div>
 <!-- <app-sidebar></app-sidebar> -->

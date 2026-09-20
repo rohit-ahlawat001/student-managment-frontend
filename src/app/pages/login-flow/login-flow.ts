@@ -70,6 +70,7 @@ export class LoginComponent {
       next: () => {
         // this.isLoading = false;
         this.router.navigate(['/dashboard']);
+        // window.location.reload();
         this.successMessage = 'Account created. Please sign in.';
         localStorage.setItem("loginSuccess", this.loginSuccess)
       },
@@ -94,7 +95,9 @@ export class LoginComponent {
     this.http.post(url, this.signUpForm.getRawValue()).subscribe({
       next: () => {
         // this.isLoading = false;
+        localStorage.setItem("loginSuccess", this.loginSuccess)
         this.router.navigate(['/dashboard']);
+        window.location.reload();
         this.signUpForm.reset();
         this.successMessage = 'Account created. Please sign in.';
       },

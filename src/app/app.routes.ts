@@ -28,5 +28,6 @@ export const routes: Routes = [
     {
         path: 'add-student',
         component: AddStudentFee,
-    }
+    },
+    { path: '**', redirectTo: '/login' }
 ];
