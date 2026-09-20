@@ -37,6 +37,7 @@ export class LoginComponent {
   isLoading = false;
   errorMessage = '';
   successMessage = '';
+  loginSuccess: any = 1
  
  
   // Validations match the backend rules
@@ -70,6 +71,7 @@ export class LoginComponent {
         // this.isLoading = false;
         this.router.navigate(['/dashboard']);
         this.successMessage = 'Account created. Please sign in.';
+        localStorage.setItem("loginSuccess", this.loginSuccess)
       },
       error: (error) => {
         console.error('Error creating account:', error);
