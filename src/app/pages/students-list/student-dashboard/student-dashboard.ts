@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, computed, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -14,13 +14,6 @@ export interface DashboardData {
   recent_pending_payments: any[];
 }
 
-// @Component({
-//   selector: 'app-student-dashboard',
-//   standalone: true,
-//   imports: [CommonModule],
-//   templateUrl: './student-dashboard.component.html',
-//   styleUrls: ['./student-dashboard.component.scss']
-// })
 @Component({
   selector: 'app-student-dashboard',
    imports: [CommonModule],
@@ -28,44 +21,45 @@ export interface DashboardData {
   styleUrl: './student-dashboard.scss',
 })
 export class StudentDashboardComponent implements OnInit {
-  dashboardData: DashboardData | null = null;
-  isLoading: boolean = true;
-  errorMessage: string = '';
-  // router: any;
+  readonly dashboardData = signal<DashboardData | null>(null);
+  readonly isLoading = signal(true);
+  readonly errorMessage = signal('');
+  readonly courseList = computed(() => {
+    const courseBreakdown = this.dashboardData()?.course_breakdown;
 
-  constructor(private http: HttpClient,
+    if (!courseBreakdown) {
+      return [];
+    }
+
+    return Object.entries(courseBreakdown).map(([name, count]) => ({ name, count }));
+  });
+
+  constructor(
+    private http: HttpClient,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    console.log('dashboard init');
     this.fetchDashboardData();
   }
 
   fetchDashboardData(): void {
-    this.isLoading = true;
+    this.isLoading.set(true);
+    this.errorMessage.set('');
     const url = 'http://127.0.0.1:8000/student_dashboard';
 
     this.http.get<DashboardData>(url).subscribe({
       next: (data) => {
-        // debugger;
-        this.dashboardData = data;
-        this.isLoading = false;
+        this.dashboardData.set(data);
+        this.isLoading.set(false);
       },
       error: (error) => {
         console.error('Error fetching dashboard data:', error);
-        this.errorMessage = 'Failed to load dashboard data. Please try again later.';
-        this.isLoading = false;
+        this.errorMessage.set('Failed to load dashboard data. Please try again later.');
+        this.isLoading.set(false);
       }
     });
-  }
-
-  // Convert object key-value pairs to array for @for loop rendering
-  get courseList() {
-    if (!this.dashboardData?.course_breakdown) return [];
-    return Object.keys(this.dashboardData.course_breakdown).map(course => ({
-      name: course,
-      count: this.dashboardData!.course_breakdown[course]
-    }));
   }
     cehcingFin(){
     console.log("checkingFin");
