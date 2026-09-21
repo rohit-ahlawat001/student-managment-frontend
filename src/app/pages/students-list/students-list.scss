@@ -233,3 +233,9 @@ table {
   font-size: 1.4rem;
   font-weight: 600;
 }
+.table-container{
+  tbody{
+    height: calc(100vh - 200px);
+    overflow-y: scroll;
+  }
+}
