@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Sidenavbar } from './pages/students-list/sidenavbar/sidenavbar';
+import { AuthService } from './auth/auth.service';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Sidenavbar, CommonModule],
@@ -9,11 +10,6 @@ import { Sidenavbar } from './pages/students-list/sidenavbar/sidenavbar';
   styleUrl: './app.scss'
 })
 export class App {
-  loginValue:any;
   protected readonly title = signal('frontend');
-  userLogin:any;
- ngOnInit() {
-  // debugger
-   this.loginValue =  localStorage.getItem('loginSuccess');
- }
+  protected readonly auth = inject(AuthService);
 }

@@ -1,15 +1,8 @@
 <div class="app-wrapper row m-0">
-    <!-- {{ loginValue | json }} → {{ loginValue == 1 }} -->
-    <ng-container *ngIf="loginValue == 1">
-        <div class="left-sidebar col-2 p-0">
-            <app-sidenavbar></app-sidenavbar>
-        </div>
-        <div class="right-sidebar col-10 p-0">
-            <router-outlet></router-outlet>
-        </div>
-    </ng-container>
-    <ng-container *ngIf="loginValue != 1">
+    <div class="left-sidebar col-2 p-0" *ngIf="auth.isAuthenticated()">
+        <app-sidenavbar></app-sidenavbar>
+    </div>
+    <div [ngClass]="auth.isAuthenticated() ? 'right-sidebar col-10 p-0' : 'col-12 p-0'">
         <router-outlet></router-outlet>
-    </ng-container>
+    </div>
 </div>
-<!-- <app-sidebar></app-sidebar> -->
