@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-sidenavbar',
@@ -9,16 +10,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './sidenavbar.scss',
 })
 export class Sidenavbar {
-  loginValue:any
-
-  ngOnInit() {
-    // debugger
-    this.loginValue =  localStorage.getItem('loginSuccess');
-  }
+  readonly isLogoutModalOpen = signal(false);
 
   constructor(
      private router: Router,
-    private activateRoute: ActivatedRoute,
+     private auth: AuthService,
   ) 
   {
   }
@@ -36,9 +32,17 @@ export class Sidenavbar {
     console.log("navigateToDashboard");
     this.router.navigate(['/dashboard']);
   }
-  logOut(){
-     localStorage.clear();
-     this.router.navigate(['/login']);
-     window.location.reload();
+  openLogoutModal(): void {
+    this.isLogoutModalOpen.set(true);
+  }
+
+  closeLogoutModal(): void {
+    this.isLogoutModalOpen.set(false);
+  }
+
+  confirmLogout(): void {
+    this.closeLogoutModal();
+    this.auth.signOut();
+    this.router.navigate(['/login']);
   }
 }

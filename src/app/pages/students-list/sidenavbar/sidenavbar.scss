@@ -71,3 +71,71 @@ $active-bg: #2563eb;
     }
   }
 }
+
+.logout-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.logout-modal {
+  width: min(100%, 390px);
+  padding: 28px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.24);
+  text-align: center;
+
+  h2 {
+    margin: 16px 0 24px;
+    color: #1e293b;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+}
+
+.logout-icon {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #fee2e2;
+  color: #dc2626;
+
+  svg {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+.logout-modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+
+  button {
+    min-width: 110px;
+    border: 0;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
+.cancel-button {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.logout-button {
+  background: #dc2626;
+  color: #fff;
+}

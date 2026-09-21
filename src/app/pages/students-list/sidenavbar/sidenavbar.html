@@ -23,10 +23,32 @@
             </p>
         </li>
         <li>
-            <p (click)="logOut()">
+            <p (click)="openLogoutModal()">
                 <span class="icon">➕</span>
                 <span class="label">Log Out</span>
             </p>
         </li>
     </ul>
 </nav>
+
+@if (isLogoutModalOpen()) {
+<div class="logout-modal-backdrop" (click)="closeLogoutModal()">
+    <section class="logout-modal" role="dialog" aria-modal="true" aria-labelledby="logout-modal-title"
+        (click)="$event.stopPropagation()">
+        <div class="logout-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M10 17l5-5-5-5"></path>
+                <path d="M15 12H3"></path>
+                <path d="M21 19V5a2 2 0 0 0-2-2h-6"></path>
+                <path d="M10 21H5a2 2 0 0 1-2-2v-2"></path>
+            </svg>
+        </div>
+        <h2 id="logout-modal-title">Are you sure you want to logout?</h2>
+        <div class="logout-modal-actions">
+            <button type="button" class="cancel-button" (click)="closeLogoutModal()">Cancel</button>
+            <button type="button" class="logout-button" (click)="confirmLogout()">Logout</button>
+        </div>
+    </section>
+</div>
+}
