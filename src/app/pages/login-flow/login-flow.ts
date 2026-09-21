@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
 @Component({
   selector: 'app-login-flow',
   imports: [ReactiveFormsModule, CommonModule],
@@ -16,7 +17,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {
     this.signUpForm = this.fb.nonNullable.group({
     firstName: ['', [Validators.required, Validators.minLength(2)]],
@@ -37,7 +39,6 @@ export class LoginComponent {
   isLoading = false;
   errorMessage = '';
   successMessage = '';
-  loginSuccess: any = 1
  
  
   // Validations match the backend rules
@@ -68,11 +69,9 @@ export class LoginComponent {
     const url = 'http://127.0.0.1:8000/login';
   this.http.post(url, this.signInForm.getRawValue()).subscribe({
       next: () => {
-        // this.isLoading = false;
+        this.auth.signIn();
         this.router.navigate(['/dashboard']);
-        // window.location.reload();
-        this.successMessage = 'Account created. Please sign in.';
-        localStorage.setItem("loginSuccess", this.loginSuccess)
+        this.successMessage = 'Signed in successfully.';
       },
       error: (error) => {
         console.error('Error creating account:', error);
@@ -94,12 +93,10 @@ export class LoginComponent {
     // Sends { firstName, lastName, email, phone, password }
     this.http.post(url, this.signUpForm.getRawValue()).subscribe({
       next: () => {
-        // this.isLoading = false;
-        localStorage.setItem("loginSuccess", this.loginSuccess)
+        this.auth.signIn();
         this.router.navigate(['/dashboard']);
-        window.location.reload();
         this.signUpForm.reset();
-        this.successMessage = 'Account created. Please sign in.';
+        this.successMessage = 'Account created successfully.';
       },
       error: (error) => {
         console.error('Error creating account:', error);
@@ -112,4 +109,3 @@ export class LoginComponent {
     });
   }
 }
- 
