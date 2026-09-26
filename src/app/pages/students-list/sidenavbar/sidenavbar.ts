@@ -32,6 +32,9 @@ export class Sidenavbar {
     console.log("navigateToDashboard");
     this.router.navigate(['/dashboard']);
   }
+  navigateToProfile() {
+    this.router.navigate(['/profile']);
+  }
   openLogoutModal(): void {
     this.isLogoutModalOpen.set(true);
   }
