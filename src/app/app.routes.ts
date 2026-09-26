@@ -4,6 +4,7 @@ import { StudentsDetials } from './pages/students-list/students-detials/students
 import { StudentDashboardComponent } from './pages/students-list/student-dashboard/student-dashboard';
 import { AddStudentFee } from './pages/add-student-fee/add-student-fee';
 import { LoginComponent } from './pages/login-flow/login-flow';
+import { ProfilePage } from './pages/profile/profile';
 import { authGuard, guestGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
@@ -34,6 +35,12 @@ export const routes: Routes = [
         path: 'add-student',
         component: AddStudentFee,
         canActivate: [authGuard],
+    },
+    {
+        path: 'profile',
+        component: ProfilePage,
+        canActivate: [authGuard],
+        pathMatch: 'full'
     },
     { path: '**', redirectTo: '/login' }
 ];

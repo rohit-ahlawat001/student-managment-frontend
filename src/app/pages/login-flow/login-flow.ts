@@ -69,7 +69,8 @@ export class LoginComponent {
     const url = 'http://127.0.0.1:8000/login';
   this.http.post(url, this.signInForm.getRawValue()).subscribe({
       next: () => {
-        this.auth.signIn();
+        // The login API returns no account object, so retain the submitted email for the profile view.
+        this.auth.signIn({ email: this.signInForm.getRawValue().email });
         this.router.navigate(['/dashboard']);
         this.successMessage = 'Signed in successfully.';
       },
@@ -93,7 +94,8 @@ export class LoginComponent {
     // Sends { firstName, lastName, email, phone, password }
     this.http.post(url, this.signUpForm.getRawValue()).subscribe({
       next: () => {
-        this.auth.signIn();
+        const { firstName, lastName, email, phone } = this.signUpForm.getRawValue();
+        this.auth.signIn({ firstName, lastName, email, phone });
         this.router.navigate(['/dashboard']);
         this.signUpForm.reset();
         this.successMessage = 'Account created successfully.';
