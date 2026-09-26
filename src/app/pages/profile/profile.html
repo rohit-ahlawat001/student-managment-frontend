@@ -1,56 +1,56 @@
 <main class="profile-page">
-  <header class="page-heading">
-    <div>
-      <p class="eyebrow">ACCOUNT</p>
-      <h1>Profile</h1>
-      <p class="heading-copy">Your administrator account details.</p>
-    </div>
-    <span class="role-pill"><span class="role-dot"></span> Administrator</span>
-  </header>
+    <header class="page-heading">
+        <div>
+            <p class="eyebrow">ACCOUNT</p>
+            <h1>Profile</h1>
+            <p class="heading-copy">Your administrator account details.</p>
+        </div>
+        <span class="role-pill"><span class="role-dot"></span> Administrator</span>
+    </header>
 
-  <section class="profile-overview" aria-label="Profile overview">
-    <div class="avatar" aria-hidden="true">{{ initials() }}</div>
-    <div class="identity">
-      <h2>{{ displayName() }}</h2>
-      <p>{{ profile()?.email || 'Email not available' }}</p>
-    </div>
-    <div class="account-status">
-      <span class="status-indicator"></span>
-      <span>Signed in</span>
-    </div>
-  </section>
+    <section class="profile-overview" aria-label="Profile overview">
+        <div class="avatar" aria-hidden="true">{{ initials() }}</div>
+        <div class="identity">
+            <h2>{{ displayName() }}</h2>
+            <p>{{ profile()?.email || 'Email not available' }}</p>
+        </div>
+        <div class="account-status">
+            <span class="status-indicator"></span>
+            <span>Signed in</span>
+        </div>
+    </section>
 
-  <section class="details-section" aria-labelledby="details-heading">
-    <div class="section-heading">
-      <div>
-        <h2 id="details-heading">Personal details</h2>
-        <p>Contact information associated with this account.</p>
-      </div>
-      <span class="section-index">01</span>
-    </div>
+    <section class="details-section" aria-labelledby="details-heading">
+        <div class="section-heading">
+            <div>
+                <h2 id="details-heading">Personal details</h2>
+                <p>Contact information associated with this account.</p>
+            </div>
+            <span class="section-index">01</span>
+        </div>
 
-    <dl class="details-grid">
-      <div class="detail-item">
-        <dt>First name</dt>
-        <dd>{{ profile()?.firstName || 'Not provided' }}</dd>
-      </div>
-      <div class="detail-item">
-        <dt>Last name</dt>
-        <dd>{{ profile()?.lastName || 'Not provided' }}</dd>
-      </div>
-      <div class="detail-item">
-        <dt>Email address</dt>
-        <dd>{{ profile()?.email || 'Not available' }}</dd>
-      </div>
-      <div class="detail-item">
-        <dt>Phone number</dt>
-        <dd>{{ profile()?.phone || 'Not provided' }}</dd>
-      </div>
-    </dl>
-  </section>
+        <dl class="details-grid">
+            <div class="detail-item">
+                <dt>First name</dt>
+                <dd>{{ profile()?.firstName || 'Not provided' }}</dd>
+            </div>
+            <div class="detail-item">
+                <dt>Last name</dt>
+                <dd>{{ profile()?.lastName || 'Not provided' }}</dd>
+            </div>
+            <div class="detail-item">
+                <dt>Email address</dt>
+                <dd>{{ profile()?.email || 'Not available' }}</dd>
+            </div>
+            <div class="detail-item">
+                <dt>Phone number</dt>
+                <dd>{{ profile()?.phone || 'Not provided' }}</dd>
+            </div>
+        </dl>
+    </section>
 
-  <aside class="profile-note">
-    <span class="note-mark" aria-hidden="true">i</span>
-    <p>Profile details are based on the information available from your current sign-in.</p>
-  </aside>
+    <aside class="profile-note">
+        <span class="note-mark" aria-hidden="true">i</span>
+        <p>Profile details are based on the information available from your current sign-in.</p>
+    </aside>
 </main>
