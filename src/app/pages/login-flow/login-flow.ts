@@ -72,11 +72,13 @@ export class LoginComponent {
   this.http.post(url, this.signInForm.getRawValue()).subscribe({
       next: () => {
         // The login API returns no account object, so retain the submitted email for the profile view.
+        debugger;
         this.auth.signIn({ email: this.signInForm.getRawValue().email });
         setTimeout(() => {
           this.loginSuccess = true;
-        }, 1000);
-        return;
+        }, 5000);
+        // return;
+        this.loginSuccess = false;
         this.router.navigate(['/dashboard']);
         this.successMessage = 'Signed in successfully.';
       },
@@ -103,8 +105,11 @@ export class LoginComponent {
         const { firstName, lastName, email, phone } = this.signUpForm.getRawValue();
         this.auth.signIn({ firstName, lastName, email, phone });
         setTimeout(() => {
+           this.loginSuccess = true;
           this.isSignup = true;
-        }, 1000);
+        }, 5000);
+         this.loginSuccess = false;
+         this.isSignup = false;
         this.router.navigate(['/dashboard']);
         this.signUpForm.reset();
         this.successMessage = 'Account created successfully.';
