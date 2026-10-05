@@ -131,23 +131,24 @@
             </form>
         </div>
     </section>
-</div>
+    <div class="loginSuccess-wrapper" *ngIf="loginSuccess">
+        <div class="inner-content">
+            <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle class="success-circle" cx="12" cy="12" r="10" pathLength="1" transform="rotate(-90 12 12)">
+                </circle>
+                <polyline class="success-check" points="7 12.5 10.5 16 17 9" pathLength="1"></polyline>
+            </svg>
+            <h3 class="success-title mt-3">
+                {{ isSignup ? 'Account Created Successfully!' : 'Welcome Back!' }}
+            </h3>
 
-<div class="loginSuccess-wrapper" *ngIf="loginSuccess">
-    <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle class="success-circle" cx="12" cy="12" r="10" pathLength="1" transform="rotate(-90 12 12)">
-        </circle>
-        <polyline class="success-check" points="7 12.5 10.5 16 17 9" pathLength="1"></polyline>
-    </svg>
-    <h3 class="success-title mt-3">
-        {{ isSignup ? 'Account Created Successfully!' : 'Welcome Back!' }}
-    </h3>
-
-    <p class="success-message">
-        {{ isSignup
-        ? 'Welcome to Campify. Your account is ready to get started.'
-        : 'You’ve successfully signed in. Redirecting you to your dashboard...'
-        }}
-    </p>
+            <p class="success-message">
+                {{ isSignup
+                ? 'Welcome to Campify. Your account is ready to get started.'
+                : 'You’ve successfully signed in. Redirecting you to your dashboard...'
+                }}
+            </p>
+        </div>
+    </div>
 </div>
