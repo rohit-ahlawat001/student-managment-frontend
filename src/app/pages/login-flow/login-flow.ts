@@ -39,6 +39,7 @@ export class LoginComponent {
   isLoading = false;
   errorMessage = '';
   successMessage = '';
+  loginSuccess = false;
  
  
   // Validations match the backend rules
@@ -71,6 +72,10 @@ export class LoginComponent {
       next: () => {
         // The login API returns no account object, so retain the submitted email for the profile view.
         this.auth.signIn({ email: this.signInForm.getRawValue().email });
+        setTimeout(() => {
+          this.loginSuccess = true;
+        }, 1000);
+        return;
         this.router.navigate(['/dashboard']);
         this.successMessage = 'Signed in successfully.';
       },
