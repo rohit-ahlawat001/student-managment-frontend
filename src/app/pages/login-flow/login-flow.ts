@@ -40,6 +40,7 @@ export class LoginComponent {
   errorMessage = '';
   successMessage = '';
   loginSuccess = false;
+  isSignup = false;
  
  
   // Validations match the backend rules
@@ -101,6 +102,9 @@ export class LoginComponent {
       next: () => {
         const { firstName, lastName, email, phone } = this.signUpForm.getRawValue();
         this.auth.signIn({ firstName, lastName, email, phone });
+        setTimeout(() => {
+          this.isSignup = true;
+        }, 1000);
         this.router.navigate(['/dashboard']);
         this.signUpForm.reset();
         this.successMessage = 'Account created successfully.';
