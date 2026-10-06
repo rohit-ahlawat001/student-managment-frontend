@@ -25,7 +25,9 @@ export class AuthService {
       localStorage.setItem(this.profileStorageKey, JSON.stringify(profile));
     }
     this.profile.set(profile);
-    this.isAuthenticated.set(true);
+    setTimeout(() => {
+      this.isAuthenticated.set(true);
+    },3000);
   }
 
   signOut(): void {
