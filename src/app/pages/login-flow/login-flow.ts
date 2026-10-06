@@ -73,7 +73,7 @@ export class LoginComponent {
       next: () => {
         // The login API returns no account object, so retain the submitted email for the profile view.
         this.auth.signIn({ email: this.signInForm.getRawValue().email });
-        debugger;
+        // debugger;
         this.loginSuccess = true;
         setTimeout(() => {
           this.loginSuccess = false;
