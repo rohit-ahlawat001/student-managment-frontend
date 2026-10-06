@@ -79,7 +79,7 @@ export class LoginComponent {
           this.loginSuccess = false;
           this.router.navigate(['/dashboard']);
           this.successMessage = 'Signed in successfully.';
-        }, 5000);
+        }, 7000);
         // return;
       },
       error: (error) => {
@@ -104,15 +104,15 @@ export class LoginComponent {
       next: () => {
         const { firstName, lastName, email, phone } = this.signUpForm.getRawValue();
         this.auth.signIn({ firstName, lastName, email, phone });
+        this.loginSuccess = true;
+       this.isSignup = true;
         setTimeout(() => {
-           this.loginSuccess = true;
-          this.isSignup = true;
+          this.loginSuccess = false;
+          this.isSignup = false;
+         this.router.navigate(['/dashboard']);
+         this.signUpForm.reset();
+         this.successMessage = 'Account created successfully.';
         }, 5000);
-         this.loginSuccess = false;
-         this.isSignup = false;
-        this.router.navigate(['/dashboard']);
-        this.signUpForm.reset();
-        this.successMessage = 'Account created successfully.';
       },
       error: (error) => {
         console.error('Error creating account:', error);
