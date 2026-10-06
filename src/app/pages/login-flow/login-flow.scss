@@ -266,36 +266,3 @@ input:focus {
     display: none; /* show only the form on small screens */
   }
 }
-
-// Login Success wrapper
-
-.loginSuccess-wrapper{
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 24px;
-
-  .inner-content {
-    max-width: 480px;
-  }
-
-  svg{
-    width: 80px;
-    height: 80px;
-    color: var(--green);
-  }
-  h3{
-    font-size: 24px;
-    margin-top: 16px;
-  }
-  p{
-    font-size: 16px;
-    margin-top: 8px;
-    color: var(--text);
-  }
-}

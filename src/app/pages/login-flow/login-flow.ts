@@ -38,9 +38,6 @@ export class LoginComponent {
   showPassword = false;
   isLoading = false;
   errorMessage = '';
-  successMessage = '';
-  loginSuccess = false;
-  isSignup = false;
  
  
   // Validations match the backend rules
@@ -50,7 +47,6 @@ export class LoginComponent {
     this.activeTab = tab;
     this.showPassword = false;
     this.errorMessage = '';
-    this.successMessage = '';
   }
  
   togglePassword() {
@@ -76,12 +72,7 @@ export class LoginComponent {
         // The login API returns no account object, so retain the submitted email for the profile view.
         this.auth.signIn({ email: this.signInForm.getRawValue().email });
         this.isLoading = false;
-        this.loginSuccess = true;
-        setTimeout(() => {
-          this.loginSuccess = false;
-          this.router.navigate(['/dashboard']);
-          this.successMessage = 'Signed in successfully.';
-        }, 3000);
+        this.router.navigate(['/dashboard']);
       },
       error: (error) => {
         console.error('Error signing in:', error);
@@ -110,15 +101,8 @@ export class LoginComponent {
         const { firstName, lastName, email, phone } = this.signUpForm.getRawValue();
         this.auth.signIn({ firstName, lastName, email, phone });
         this.isLoading = false;
-        this.loginSuccess = true;
-        this.isSignup = true;
-        setTimeout(() => {
-          this.loginSuccess = false;
-          this.isSignup = false;
-          this.router.navigate(['/dashboard']);
-          this.signUpForm.reset();
-          this.successMessage = 'Account created successfully.';
-        }, 3000);
+        this.signUpForm.reset();
+        this.router.navigate(['/dashboard']);
       },
       error: (error) => {
         console.error('Error creating account:', error);
