@@ -86,7 +86,10 @@
 
                 <!-- <a href="#" class="forgot">Forgot Password?</a> -->
 
-                <button type="submit" class="primary-btn">Sign In</button>
+                <small class="error" *ngIf="errorMessage">{{ errorMessage }}</small>
+                <button type="submit" class="primary-btn" [disabled]="isLoading">
+                    {{ isLoading ? 'Signing In...' : 'Sign In' }}
+                </button>
             </form>
 
             <!-- SIGN UP -->
@@ -127,7 +130,10 @@
                         characters</small>
                 </div>
 
-                <button type="submit" class="primary-btn">Sign Up</button>
+                <small class="error" *ngIf="errorMessage">{{ errorMessage }}</small>
+                <button type="submit" class="primary-btn" [disabled]="isLoading">
+                    {{ isLoading ? 'Creating Account...' : 'Sign Up' }}
+                </button>
             </form>
         </div>
     </section>
