@@ -79,7 +79,7 @@ export class LoginComponent {
           this.loginSuccess = false;
           this.router.navigate(['/dashboard']);
           this.successMessage = 'Signed in successfully.';
-        }, 4000);
+        }, 3000);
         // return;
       },
       error: (error) => {
@@ -112,7 +112,7 @@ export class LoginComponent {
          this.router.navigate(['/dashboard']);
          this.signUpForm.reset();
          this.successMessage = 'Account created successfully.';
-        }, 4000);
+        }, 3000);
       },
       error: (error) => {
         console.error('Error creating account:', error);
