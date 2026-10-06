@@ -72,15 +72,15 @@ export class LoginComponent {
   this.http.post(url, this.signInForm.getRawValue()).subscribe({
       next: () => {
         // The login API returns no account object, so retain the submitted email for the profile view.
-        debugger;
         this.auth.signIn({ email: this.signInForm.getRawValue().email });
+        debugger;
+        this.loginSuccess = true;
         setTimeout(() => {
-          this.loginSuccess = true;
+          this.loginSuccess = false;
+          this.router.navigate(['/dashboard']);
+          this.successMessage = 'Signed in successfully.';
         }, 5000);
         // return;
-        this.loginSuccess = false;
-        this.router.navigate(['/dashboard']);
-        this.successMessage = 'Signed in successfully.';
       },
       error: (error) => {
         console.error('Error creating account:', error);
