@@ -21,6 +21,7 @@ export class StudentsList implements OnInit {
   showDeleteModal: boolean = false;
   selectedStudentId: number | null = null;
   selectedStudentName:any
+  showFilterModal: boolean = false;
     constructor(
     private router: Router,
     private activateRoute: ActivatedRoute,
@@ -82,5 +83,9 @@ openDeleteModal(data: any) {
       this.deleteStudent(this.selectedStudentId);
       this.closeDeleteModal();
     }
+  }
+  filterStudents(){
+  console.log('Filter button clicked');
+   this.showFilterModal = true;
   }
 }
