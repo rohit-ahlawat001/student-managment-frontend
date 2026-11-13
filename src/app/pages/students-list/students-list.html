@@ -1,5 +1,10 @@
 <div class="table-container">
-  <h2 class="main-heading">Student Directory</h2>
+  <div class="top-heading">
+    <h2 class="main-heading">Student Directory</h2>
+    <div class="right-filter-wrapper">
+      <button class="btn btn-primary" (click)="filterStudents()">Filter</button>
+    </div>
+  </div>
 
   <!-- Success Notification Banner -->
   @if (successMessage) {
@@ -89,3 +94,17 @@
   </div>
 </div>
 }
+
+<!-- filter Student Modal -->
+{{showFilterModal}}
+<div class="student-modal-wrapper" ngif="!showFilterModal">
+  <div class="top-heading">
+    <h3>Filter Students</h3>
+  </div>
+  <div class="filter-student-form">
+    <input type="text" placeholder="Enter Student Name" [(ngModel)]="filterName" />
+    <input type="text" placeholder="Enter Course" [(ngModel)]="filterCourse" />
+    <input type="text" placeholder="Enter Semester" [(ngModel)]="filterSemester" />
+    <button class="btn btn-primary" (click)="applyFilter()">Apply Filter</button>
+    <button class="btn btn-secondary" (click)="clearFilter()">Clear Filter</button>
+  </div>
